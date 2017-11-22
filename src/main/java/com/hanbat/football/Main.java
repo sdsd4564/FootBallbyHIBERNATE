@@ -21,6 +21,7 @@ public class Main {
 
             tx = session.beginTransaction();
 
+            //todo 브랜치 추가를 위한 주석
             Country korea = new Country("Korea", "Seoul");
             session.save(korea);
 
