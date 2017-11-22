@@ -18,7 +18,7 @@ public class Team {
     @Column(name = "rank", nullable = false)
     private int rank;
 
-    @Column(name = "logo_filepath", nullable = false)
+    @Column(name = "logo_filepath")
     private String logoFilePath;
 
     @Temporal(TemporalType.DATE)

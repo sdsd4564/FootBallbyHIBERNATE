@@ -18,6 +18,7 @@ public class Main {
         Transaction tx = null;
 
         try (Session session = sessionFactory.openSession()) {
+
             tx = session.beginTransaction();
 
             Country korea = new Country("Korea", "Seoul");
@@ -34,7 +35,7 @@ public class Main {
 
             Player player = new Player("Son Heung Min", 25, true, korea, FootType.BOTH, Position.FW, 183, 76, null, new HashSet<>());
             session.save(player);
-
+//
             Team team = new Team("Tottenham Hotspur FC", "Mauricio Pochittino", 4, null, new Date(), england, stadium, league, new HashSet<>());
             session.save(team);
 
@@ -48,7 +49,6 @@ public class Main {
             if (tx != null) tx.rollback();
             e.printStackTrace();
         }
-
         sessionFactory.close();
     }
 }

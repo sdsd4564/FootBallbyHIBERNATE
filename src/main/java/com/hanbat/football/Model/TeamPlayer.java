@@ -9,14 +9,14 @@ public class TeamPlayer {
     @EmbeddedId
     private TeamPlayerID id = new TeamPlayerID();
 
-    @MapsId("team")
+    @MapsId("teamId")
     @ManyToOne
-    @JoinColumn(name = "team_name")
+    @JoinColumn
     private Team team;
 
-    @MapsId("player")
+    @MapsId("playerId")
     @ManyToOne
-    @JoinColumn(name = "player_id")
+    @JoinColumn
     private Player player;
 
 //    private int backNumber;

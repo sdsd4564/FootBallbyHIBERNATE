@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "player")
 public class Player {
 
     @Id
@@ -32,9 +31,11 @@ public class Player {
     private Country country;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private FootType footType;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Position position;
 
     @OneToMany(
