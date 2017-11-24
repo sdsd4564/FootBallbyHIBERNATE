@@ -4,6 +4,7 @@ import com.hanbat.football.Model.*;
 import com.hanbat.football.Model.Enum.FootType;
 import com.hanbat.football.Model.Enum.Position;
 import com.hanbat.football.Util.HibernateUtil;
+import com.hanbat.football.View.View;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,7 +22,6 @@ public class Main {
 
             tx = session.beginTransaction();
 
-            //todo 브랜치 추가를 위한 주석
             Country korea = new Country("Korea", "Seoul");
             session.save(korea);
 
@@ -51,5 +51,7 @@ public class Main {
             e.printStackTrace();
         }
         sessionFactory.close();
+
+        View.main(args);
     }
 }
