@@ -21,7 +21,6 @@ public class View extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("FOOTBALL MANAGER");
-
         initRootLayout();
     }
 
@@ -34,6 +33,7 @@ public class View extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+            primaryStage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
