@@ -22,7 +22,7 @@ public class DatabaseHelper {
 
     public static List getPlayerNames() {
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("SELECT name FROM Player ");
+        Query query = session.createQuery("FROM Player ");
         tx.commit();
         return query.list();
     }

@@ -6,6 +6,8 @@ import com.hanbat.football.Model.Enum.Position;
 import com.hanbat.football.Util.DatabaseHelper;
 import com.hanbat.football.View.View;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -22,28 +24,35 @@ public class Main {
 //            tx = session.beginTransaction();
         DatabaseHelper.sessionOpen();
 
-        Country korea = new Country("Korea", "Seoul");
-        DatabaseHelper.saveObject(korea);
 
-        Country england = new Country("England", "London");
-        DatabaseHelper.saveObject(england);
+        try {
+            Country korea = new Country("Korea", "Seoul");
+            DatabaseHelper.saveObject(korea);
 
-        League league = new League("Premier League", england, new Date());
-        DatabaseHelper.saveObject(league);
+            Country england = new Country("England", "London");
+            DatabaseHelper.saveObject(england);
 
-        Stadium stadium = new Stadium("Wembley Stadium", 90000, new Date(), england);
-        DatabaseHelper.saveObject(stadium);
+            League league = new League("Premier League", england, new Date());
+            DatabaseHelper.saveObject(league);
 
-        Player player = new Player("Son Heung Min", 25, true, korea, FootType.BOTH, Position.FW, 183, 76, null, new HashSet<>());
-        DatabaseHelper.saveObject(player);
+            Stadium stadium = new Stadium("Wembley Stadium", 90000, new Date(), england);
+            DatabaseHelper.saveObject(stadium);
 
-        Team team = new Team("Tottenham Hotspur FC", "Mauricio Pochittino", 4, null, new Date(), england, stadium, league, new HashSet<>());
-        DatabaseHelper.saveObject(team);
+            Player player = new Player("Son Heung Min", new SimpleDateFormat("yyyyMMdd").parse("19920708"), true, korea, FootType.BOTH, Position.FW, 183, 76, null, new HashSet<>());
+            DatabaseHelper.saveObject(player);
 
-        TeamPlayer teamPlayer = new TeamPlayer();
-        teamPlayer.setPlayer(player);
-        teamPlayer.setTeam(team);
-        DatabaseHelper.saveObject(teamPlayer);
+            Team team = new Team("Tottenham Hotspur FC", "Mauricio Pochittino", 4, null, new Date(), england, stadium, league, new HashSet<>());
+            DatabaseHelper.saveObject(team);
+
+            TeamPlayer teamPlayer = new TeamPlayer();
+            teamPlayer.setPlayer(player);
+            teamPlayer.setTeam(team);
+            DatabaseHelper.saveObject(teamPlayer);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
 //
 //            tx.commit();
 //        } catch (Exception e) {

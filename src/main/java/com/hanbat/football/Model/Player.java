@@ -4,6 +4,7 @@ import com.hanbat.football.Model.Enum.FootType;
 import com.hanbat.football.Model.Enum.Position;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,8 @@ public class Player {
     private String name;
 
     @Column(nullable = false)
-    private int age;
+    @Temporal(TemporalType.DATE)
+    private Date birth;
 
     @Column(
             name = "sex",
@@ -53,9 +55,9 @@ public class Player {
     public Player() {
     }
 
-    public Player(String name, int age, boolean isMale, Country country, FootType footType, Position position, String filePath, Set<TeamPlayer> teams) {
+    public Player(String name, Date birth, boolean isMale, Country country, FootType footType, Position position, String filePath, Set<TeamPlayer> teams) {
         this.name = name;
-        this.age = age;
+        this.birth = birth;
         this.isMale = isMale;
         this.country = country;
         this.footType = footType;
@@ -64,9 +66,9 @@ public class Player {
         this.teams = teams;
     }
 
-    public Player(String name, int age, boolean isMale, Country country, FootType footType, Position position, double height, double weight, String filePath, Set<TeamPlayer> teams) {
+    public Player(String name, Date birth, boolean isMale, Country country, FootType footType, Position position, double height, double weight, String filePath, Set<TeamPlayer> teams) {
         this.name = name;
-        this.age = age;
+        this.birth = birth;
         this.isMale = isMale;
         this.country = country;
         this.footType = footType;
@@ -101,12 +103,12 @@ public class Player {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public Date getBirth() {
+        return birth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirth(Date birth) {
+        this.birth = birth;
     }
 
     public boolean isMale() {
