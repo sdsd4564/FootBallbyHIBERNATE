@@ -13,20 +13,255 @@
     <schema id="7" parent="1" name="sys"/>
     <schema id="8" parent="1" name="world"/>
     <table id="9" parent="2" name="country"/>
-    <column id="10" parent="9" name="name">
+    <table id="10" parent="2" name="hibernate_sequence"/>
+    <table id="11" parent="2" name="league"/>
+    <table id="12" parent="2" name="player"/>
+    <table id="13" parent="2" name="stadium"/>
+    <table id="14" parent="2" name="team"/>
+    <table id="15" parent="2" name="teamplayer"/>
+    <column id="16" parent="9" name="name">
       <Position>1</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="11" parent="9" name="capital">
+    <column id="17" parent="9" name="capital">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="12" parent="9" name="PRIMARY">
+    <key id="18" parent="9" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>name</ColNames>
       <Primary>1</Primary>
     </key>
+    <column id="19" parent="10" name="next_val">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="20" parent="11" name="name">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="21" parent="11" name="foundationDay">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="22" parent="11" name="country_name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="23" parent="11" name="FKiev2axbf08ff97y3dapdcl43v">
+      <ColNames>country_name</ColNames>
+    </index>
+    <key id="24" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="25" parent="11" name="FKiev2axbf08ff97y3dapdcl43v">
+      <ColNames>country_name</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>country</RefTableName>
+      <RefColNames>name</RefColNames>
+    </foreign-key>
+    <column id="26" parent="12" name="pid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="12" name="age">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="12" name="filePath">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="29" parent="12" name="footType">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="12" name="height">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="12" name="sex">
+      <Position>6</Position>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="12" name="name">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="12" name="position">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="12" name="weight">
+      <Position>9</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="12" name="country_name">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="36" parent="12" name="FK2sm1gj3fmysj35sk11ip443je">
+      <ColNames>country_name</ColNames>
+    </index>
+    <key id="37" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>pid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="38" parent="12" name="FK2sm1gj3fmysj35sk11ip443je">
+      <ColNames>country_name</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>country</RefTableName>
+      <RefColNames>name</RefColNames>
+    </foreign-key>
+    <column id="39" parent="13" name="name">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="13" name="capacity">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="13" name="openDate">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="13" name="country_name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="43" parent="13" name="FK1qgwhbwgbmk2fb1vygljp4tsx">
+      <ColNames>country_name</ColNames>
+    </index>
+    <key id="44" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="45" parent="13" name="FK1qgwhbwgbmk2fb1vygljp4tsx">
+      <ColNames>country_name</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>country</RefTableName>
+      <RefColNames>name</RefColNames>
+    </foreign-key>
+    <column id="46" parent="14" name="name">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="14" name="coach">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="14" name="foundation_day">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="49" parent="14" name="logo_filepath">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="50" parent="14" name="rank">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="14" name="country_name">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="14" name="league_name">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="14" name="stadium_name">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="54" parent="14" name="FKg4y39fkx6ba0cxqvvxxulxgg3">
+      <ColNames>stadium_name</ColNames>
+    </index>
+    <index id="55" parent="14" name="FKgdxnwxs5m1u4wibucks92tebr">
+      <ColNames>country_name</ColNames>
+    </index>
+    <index id="56" parent="14" name="FKh4ivmfki4b9y39aiosk0x1n28">
+      <ColNames>league_name</ColNames>
+    </index>
+    <key id="57" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="58" parent="14" name="FKgdxnwxs5m1u4wibucks92tebr">
+      <ColNames>country_name</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>country</RefTableName>
+      <RefColNames>name</RefColNames>
+    </foreign-key>
+    <foreign-key id="59" parent="14" name="FKh4ivmfki4b9y39aiosk0x1n28">
+      <ColNames>league_name</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>league</RefTableName>
+      <RefColNames>name</RefColNames>
+    </foreign-key>
+    <foreign-key id="60" parent="14" name="FKg4y39fkx6ba0cxqvvxxulxgg3">
+      <ColNames>stadium_name</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>stadium</RefTableName>
+      <RefColNames>name</RefColNames>
+    </foreign-key>
+    <column id="61" parent="15" name="player_pid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="15" name="team_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="63" parent="15" name="FK7qak1jt244l3iwksdye9in2nl">
+      <ColNames>team_name</ColNames>
+    </index>
+    <key id="64" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>player_pid
+team_name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="65" parent="15" name="FK38ccg3pupvnhjfmp6oca9tmo4">
+      <ColNames>player_pid</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>player</RefTableName>
+      <RefColNames>pid</RefColNames>
+    </foreign-key>
+    <foreign-key id="66" parent="15" name="FK7qak1jt244l3iwksdye9in2nl">
+      <ColNames>team_name</ColNames>
+      <RefSchemaName>football</RefSchemaName>
+      <RefTableName>team</RefTableName>
+      <RefColNames>name</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>
