@@ -23,7 +23,7 @@ public class Team {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "foundation_day")
-    private Date birth;
+    private Date foundationDay;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -61,12 +61,12 @@ public class Team {
         this.players = players;
     }
 
-    public Team(String name, String coach, int rank, String logoFilePath, Date birth, Country country, Stadium stadium, League league, Set<TeamPlayer> players) {
+    public Team(String name, String coach, int rank, String logoFilePath, Date foundationDay, Country country, Stadium stadium, League league, Set<TeamPlayer> players) {
         this.name = name;
         this.coach = coach;
         this.rank = rank;
         this.logoFilePath = logoFilePath;
-        this.birth = birth;
+        this.foundationDay = foundationDay;
         this.country = country;
         this.stadium = stadium;
         this.league = league;
@@ -77,12 +77,12 @@ public class Team {
         return players;
     }
 
-    public Date getBirth() {
-        return birth;
+    public Date getFoundationDay() {
+        return foundationDay;
     }
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
+    public void setFoundationDay(Date birth) {
+        this.foundationDay = birth;
     }
 
     public Stadium getStadium() {

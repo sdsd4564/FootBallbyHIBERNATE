@@ -100,7 +100,7 @@ public class PlayerCtrl implements Initializable {
                 loader.setControllerFactory((Class<?> controllerType) -> {
                     if (controllerType == LeagueCtrl.class) {
                         LeagueCtrl controller = new LeagueCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam().getLeague());
-                        return controller ;
+                        return controller;
                     } else {
                         try {
                             return controllerType.newInstance();
@@ -123,7 +123,7 @@ public class PlayerCtrl implements Initializable {
 
     private void setPlayerView(Player player) {
         playerName.setText(player.getName());
-        playerBirth.setText(new SimpleDateFormat("yyyy년 MM월 dd일").format(player.getBirth()));
+        playerBirth.setText(new SimpleDateFormat("yyyy년 M월 d일").format(player.getBirth()));
         playerBody.setText(player.getHeight() + "cm\n/" + player.getWeight() + "kg");
         playerPosition.setText(player.getPosition().toString() + "(" + player.getPosition().getDescription() + ")");
         playerFoot.setText(player.getFootType().getDescription());

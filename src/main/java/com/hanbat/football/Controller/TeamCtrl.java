@@ -15,10 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
-import sun.security.provider.ConfigFile;
 
-import java.lang.management.PlatformLoggingMXBean;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,7 +141,7 @@ public class TeamCtrl implements Initializable {
     public void setTeamView(Team team) {
         teamName.setText(team.getName());
         teamCoach.setText(team.getCoach());
-        teamBirth.setText(new SimpleDateFormat("yyyy년 MM월 dd일").format(team.getBirth()));
+        teamBirth.setText(new SimpleDateFormat("yyyy년 MM월 dd일").format(team.getFoundationDay()));
         teamRank.setText(Integer.toString(team.getRank()));
 
         for (TeamPlayer teamPlayer : team.getPlayers()) {

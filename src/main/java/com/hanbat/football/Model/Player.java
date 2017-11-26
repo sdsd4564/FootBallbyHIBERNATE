@@ -2,7 +2,6 @@ package com.hanbat.football.Model;
 
 import com.hanbat.football.Model.Enum.FootType;
 import com.hanbat.football.Model.Enum.Position;
-import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -56,7 +55,7 @@ public class Player {
     public Player() {
     }
 
-    public Player(String name, Date birth, boolean isMale, Country country, FootType footType, Position position, @Nullable String filePath, Set<TeamPlayer> teams) {
+    public Player(String name, Date birth, boolean isMale, Country country, FootType footType, Position position, String filePath, Set<TeamPlayer> teams) {
         this.name = name;
         this.birth = birth;
         this.isMale = isMale;
@@ -67,7 +66,7 @@ public class Player {
         this.teams = teams;
     }
 
-    public Player(String name, Date birth, boolean isMale, Country country, FootType footType, Position position, double height, double weight, @Nullable String filePath, Set<TeamPlayer> teams) {
+    public Player(String name, Date birth, boolean isMale, Country country, FootType footType, Position position, double height, double weight, String filePath, Set<TeamPlayer> teams) {
         this.name = name;
         this.birth = birth;
         this.isMale = isMale;

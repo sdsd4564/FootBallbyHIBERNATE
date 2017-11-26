@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hanbat.football.Controller.CountryCtrl">
+    <children>
+        <SplitPane dividerPositions="0.7" layoutX="187.0" layoutY="102.0" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane maxHeight="398.0" maxWidth="416.0" minHeight="398.0" minWidth="416.0" prefHeight="398.0" prefWidth="416.0">
+                    <children>
+                        <SplitPane dividerPositions="0.7" layoutX="115.0" layoutY="99.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <AnchorPane maxHeight="-Infinity" maxWidth="414.0" minHeight="-Infinity" minWidth="414.0" prefHeight="274.0" prefWidth="414.0" />
+                                <AnchorPane maxHeight="116.0" maxWidth="414.0" minHeight="116.0" minWidth="414.0" prefHeight="116.0" prefWidth="414.0">
+                                    <children>
+                                        <ListView fx:id="list" layoutX="107.0" layoutY="-42.0" prefHeight="116.0" prefWidth="414.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane maxHeight="398.0" maxWidth="176.0" minHeight="398.0" minWidth="176.0" prefHeight="398.0" prefWidth="176.0" />
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

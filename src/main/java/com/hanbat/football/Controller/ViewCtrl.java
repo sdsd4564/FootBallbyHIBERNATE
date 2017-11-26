@@ -74,5 +74,19 @@ public class ViewCtrl implements Initializable {
                 e.printStackTrace();
             }
         });
+
+        goCountry.setOnMouseClicked(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/country.fxml"));
+                Parent parent = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle("국가 검색");
+                stage.setScene(new Scene(parent));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

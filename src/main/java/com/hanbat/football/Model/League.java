@@ -1,7 +1,5 @@
 package com.hanbat.football.Model;
 
-import com.sun.istack.internal.Nullable;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,16 +20,16 @@ public class League {
     private Date foundationDay;
 
     private String filepath;
+    private String englishName;
+    private String homepageUrl;
 
     @OneToMany(mappedBy = "league")
     private Set<Team> teams = new HashSet<>();
-    private String englishName;
-    private String homepageUrl;
 
     public League() {
     }
 
-    public League(String name, Country country, @Nullable Date foundationDay, @Nullable String filepath, @Nullable String englishName, @Nullable String homepageUrl) {
+    public League(String name, Country country, Date foundationDay, String filepath, String englishName, String homepageUrl) {
         this.name = name;
         this.country = country;
         this.foundationDay = foundationDay;
