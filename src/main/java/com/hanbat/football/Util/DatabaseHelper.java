@@ -4,6 +4,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.swing.text.TableView;
 import java.util.List;
 
 public class DatabaseHelper {
@@ -21,6 +22,20 @@ public class DatabaseHelper {
     public static List getPlayerNames() {
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery("FROM Player ");
+        tx.commit();
+        return query.list();
+    }
+
+    public static List getTeamData() {
+        Transaction tx = session.beginTransaction();
+        Query teamQuery = session.createQuery("FROM Team");
+        tx.commit();
+        return teamQuery.list();
+    }
+
+    public static List getPlayerTeam(String teamName) {
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("Select name FROM Player where team = '" + teamName +"'");
         tx.commit();
         return query.list();
     }

@@ -137,7 +137,7 @@ public class PlayerCtrl implements Initializable {
         playerLeague.setText(player.getTeams().iterator().next().getTeam().getLeague().getName());
         playerLeagueView.setImage(setImageToView(player.getTeams().iterator().next().getTeam().getLeague().getFilepath()));
         playerCountry.setText(player.getCountry().getName());
-        playerCountryView.setImage(setImageToView(player.getCountry().getFilePath())); // todo : 이미지가 존재하지 않을 때 띄울 사진 요망
+        playerCountryView.setImage(setImageToView(player.getCountry().getFilePath())); //todo : 이미지가 존재하지 않을 때 띄울 사진 요망
     }
 
     private Image setImageToView(String filepath) {

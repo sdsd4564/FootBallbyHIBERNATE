@@ -46,7 +46,18 @@ public class ViewCtrl implements Initializable {
 
 
         goTeam.setOnMouseClicked(event -> {
-            System.out.println("팀 팀");
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("../View/Team.fxml"));
+                Parent parent1 = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle("구단 검색");
+                stage.setScene(new Scene(parent1));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         goLeague.setOnMouseClicked(event -> {
