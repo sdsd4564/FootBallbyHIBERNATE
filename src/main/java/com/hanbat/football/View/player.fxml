@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
 <?import java.lang.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hanbat.football.Controller.PlayerCtrl">
     <children>
@@ -35,113 +36,166 @@
                         </SplitPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane maxHeight="598.0" maxWidth="557.0" minHeight="598.0" minWidth="557.0" prefHeight="598.0" prefWidth="557.0" SplitPane.resizableWithParent="false">
+                <AnchorPane fx:id="playerInfoView" maxHeight="598.0" maxWidth="557.0" minHeight="598.0" minWidth="557.0" prefHeight="598.0" prefWidth="557.0" visible="false" SplitPane.resizableWithParent="false">
                     <children>
-                  <SplitPane dividerPositions="0.7214765100671141" layoutX="70.0" layoutY="308.0" orientation="VERTICAL" prefHeight="598.0" prefWidth="557.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                           <children>
-                              <SplitPane dividerPositions="0.35443037974683544" layoutX="201.0" layoutY="160.0" prefHeight="427.0" prefWidth="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <items>
-                                  <AnchorPane maxHeight="425.0" maxWidth="193.0" minHeight="425.0" minWidth="193.0" prefHeight="425.0" prefWidth="193.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.5, 0.5, 0.5" orientation="VERTICAL" prefHeight="425.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <items>
-                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
-                                                   <children>
-                                                      <Label layoutX="24.0" layoutY="30.0" text="이름 / 생년월일" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
-                                                      <VBox alignment="CENTER" layoutY="-15.203125" prefHeight="107.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <Text fx:id="playerName" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="185.0">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Text>
-                                                            <Text fx:id="playerBirth" strokeType="OUTSIDE" strokeWidth="0.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets top="8.0" />
-                                                               </VBox.margin>
-                                                            </Text>
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
+                        <SplitPane dividerPositions="0.7214765100671141" layoutX="70.0" layoutY="308.0" orientation="VERTICAL" prefHeight="598.0" prefWidth="557.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <children>
+                                        <SplitPane dividerPositions="0.5" layoutX="201.0" layoutY="160.0" prefHeight="427.0" prefWidth="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                                <AnchorPane maxHeight="425.0" maxWidth="193.0" minHeight="425.0" minWidth="193.0" prefHeight="425.0" prefWidth="193.0">
+                                                    <children>
+                                                        <SplitPane dividerPositions="0.5, 0.5, 0.5" orientation="VERTICAL" prefHeight="425.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <items>
+                                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
+                                                                    <children>
+                                                                        <Label layoutX="24.0" layoutY="30.0" text="이름 / 생년월일" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
+                                                                        <VBox alignment="CENTER" layoutY="-15.203125" prefHeight="107.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <children>
+                                                                                <Text fx:id="playerName" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="185.0">
+                                                                                    <font>
+                                                                                        <Font size="16.0" />
+                                                                                    </font>
+                                                                                </Text>
+                                                                                <Text fx:id="playerBirth" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                                                    <font>
+                                                                                        <Font size="14.0" />
+                                                                                    </font>
+                                                                                    <VBox.margin>
+                                                                                        <Insets top="8.0" />
+                                                                                    </VBox.margin>
+                                                                                </Text>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
+                                                                    <children>
+                                                                        <Label text="신체조건" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
+                                                                        <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <children>
+                                                                                <Text fx:id="playerBody" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="193.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="22.0">
+                                                                                    <font>
+                                                                                        <Font size="30.0" />
+                                                                                    </font>
+                                                                                    <cursor>
+                                                                                        <Cursor fx:constant="TEXT" />
+                                                                                    </cursor>
+                                                                                </Text>
+                                                                            </children>
+                                                                        </HBox>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
+                                                                    <children>
+                                                                        <Label text="포지션" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
+                                                                        <HBox alignment="CENTER" layoutX="-3.0" layoutY="4.0" prefHeight="107.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <children>
+                                                                                <Text fx:id="playerPosition" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                                                    <font>
+                                                                                        <Font size="19.0" />
+                                                                                    </font>
+                                                                                </Text>
+                                                                            </children>
+                                                                        </HBox>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
+                                                                    <children>
+                                                                        <Label text="주로 쓰는 발" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
+                                                                        <VBox alignment="CENTER" layoutX="47.0" layoutY="-46.0" prefHeight="107.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <children>
+                                                                                <Text fx:id="playerFoot" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                                                    <font>
+                                                                                        <Font size="32.0" />
+                                                                                    </font>
+                                                                                </Text>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </items>
+                                                        </SplitPane>
+                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
-                                                   <children>
-                                                      <Label text="신체조건" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
-                                                      <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="83.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <Text fx:id="playerBody" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="193.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="22.0">
-                                                               <font>
-                                                                  <Font size="30.0" />
-                                                               </font>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="TEXT" />
-                                                               </cursor>
-                                                            </Text>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
+                                                <HBox alignment="CENTER" maxHeight="425.0" maxWidth="354.0" minHeight="425.0" minWidth="354.0" prefHeight="425.0" prefWidth="354.0">
+                                                    <children>
+                                                        <ImageView fx:id="playerImageView" fitHeight="425.0" fitWidth="354.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                                            <viewport>
+                                                                <Rectangle2D />
+                                                            </viewport>
+                                                        </ImageView>
+                                                    </children>
+                                                </HBox>
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane maxHeight="163.0" maxWidth="553.0" minHeight="163.0" minWidth="553.0" prefHeight="163.0" prefWidth="553.0">
+                                    <children>
+                                        <SplitPane dividerPositions="0.333, 0.667" layoutX="177.0" layoutY="2.0" prefHeight="163.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                                <AnchorPane maxHeight="161.0" maxWidth="180.0" minHeight="161.0" minWidth="180.0" prefHeight="161.0" prefWidth="180.0">
+                                                    <children>
+                                                        <VBox alignment="CENTER" layoutX="40.0" layoutY="-19.0" prefHeight="181.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <ImageView fx:id="playerTeamView" fitHeight="80.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <Label fx:id="playerTeam" textAlignment="CENTER" wrapText="true">
+                                                                    <font>
+                                                                        <Font size="16.0" />
+                                                                    </font>
+                                                                    <opaqueInsets>
+                                                                        <Insets top="8.0" />
+                                                                    </opaqueInsets>
+                                                                    <VBox.margin>
+                                                                        <Insets top="8.0" />
+                                                                    </VBox.margin>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
-                                                   <children>
-                                                      <Label text="포지션" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
-                                                      <HBox alignment="CENTER" layoutX="-3.0" layoutY="4.0" prefHeight="107.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <Text fx:id="playerPosition" strokeType="OUTSIDE" strokeWidth="0.0">
-                                                               <font>
-                                                                  <Font size="19.0" />
-                                                               </font>
-                                                            </Text>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
+                                                <AnchorPane fx:id="leagueLayout" maxHeight="161.0" maxWidth="179.0" minHeight="161.0" minWidth="179.0" prefHeight="160.0" prefWidth="100.0">
+                                                    <children>
+                                                        <VBox alignment="CENTER" prefHeight="161.0" prefWidth="179.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <ImageView fx:id="playerLeagueView" fitHeight="80.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <Label fx:id="playerLeague" textAlignment="CENTER" wrapText="true">
+                                                                    <VBox.margin>
+                                                                        <Insets top="8.0" />
+                                                                    </VBox.margin>
+                                                                    <font>
+                                                                        <Font size="16.0" />
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane maxHeight="106.25" maxWidth="193.0" minHeight="106.25" minWidth="193.0" prefHeight="106.25" prefWidth="193.0">
-                                                   <children>
-                                                      <Label text="주로 쓰는 발" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
-                                                      <VBox alignment="CENTER" layoutX="47.0" layoutY="-46.0" prefHeight="107.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <Text fx:id="playerFoot" strokeType="OUTSIDE" strokeWidth="0.0">
-                                                               <font>
-                                                                  <Font size="32.0" />
-                                                               </font>
-                                                            </Text>
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                    <children>
+                                                        <VBox alignment="CENTER" layoutX="40.0" layoutY="-26.0" maxHeight="161.0" maxWidth="180.0" minHeight="161.0" minWidth="180.0" prefHeight="161.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <ImageView fx:id="playerCountryView" fitHeight="80.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                                                                <Label fx:id="playerCountry">
+                                                                    <VBox.margin>
+                                                                        <Insets top="8.0" />
+                                                                    </VBox.margin>
+                                                                    <font>
+                                                                        <Font size="18.0" />
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
                                                 </AnchorPane>
-                                             </items>
-                                          </SplitPane>
-                                       </children></AnchorPane>
-                                  <AnchorPane fx:id="imageLayout" minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="302.0" style="-fx-background-color: black;" SplitPane.resizableWithParent="false">
-                                       <children>
-                                          <ImageView fx:id="playerImageView" fitHeight="440.0" fitWidth="360.0" layoutX="-65.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <viewport>
-                                                <Rectangle2D />
-                                             </viewport>
-                                          </ImageView>
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane maxHeight="163.0" maxWidth="553.0" minHeight="163.0" minWidth="553.0" prefHeight="163.0" prefWidth="553.0">
-                           <children>
-                              <SplitPane dividerPositions="0.333, 0.667" layoutX="177.0" layoutY="2.0" prefHeight="163.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <items>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                                </items>
-                              </SplitPane>
-                           </children></AnchorPane>
-                    </items>
-                  </SplitPane>
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
                     </children>
                 </AnchorPane>
             </items>

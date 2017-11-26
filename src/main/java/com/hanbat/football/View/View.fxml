@@ -21,7 +21,7 @@
                                    pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="50.0"
                                    AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
                             <image>
-                                <Image url="@../../../../../resources/Images/logo.jpg"/>
+                                <Image url="/Images/logo.jpg"/>
                             </image>
                             <viewport>
                                 <Rectangle2D/>

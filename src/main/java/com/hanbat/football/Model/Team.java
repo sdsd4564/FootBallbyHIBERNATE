@@ -47,7 +47,7 @@ public class Team {
     }
 
     /*
-    * mappedBy reference an unknown target entity property: com.hanbat.football.Model.Player.team in com.hanbat.football.Model.Team.players
+    * mappedBy reference an unknown target entity property: com.hanbat.football.Model.Player.team in com.hanbat.football.Model.Team.player
       Exception in thread "main" java.lang.ExceptionInInitializerError
     * */
 

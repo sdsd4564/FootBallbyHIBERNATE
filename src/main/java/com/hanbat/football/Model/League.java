@@ -1,13 +1,18 @@
 package com.hanbat.football.Model;
 
+import com.sun.istack.internal.Nullable;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class League {
 
     @Id
     private String name;
+
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -16,18 +21,55 @@ public class League {
     @Temporal(TemporalType.DATE)
     private Date foundationDay;
 
+    private String filepath;
+
+    @OneToMany(mappedBy = "league")
+    private Set<Team> teams = new HashSet<>();
+    private String englishName;
+    private String homepageUrl;
+
     public League() {
     }
 
-    public League(String name, Country country) {
-        this.name = name;
-        this.country = country;
-    }
-
-    public League(String name, Country country, Date foundationDay) {
+    public League(String name, Country country, @Nullable Date foundationDay, @Nullable String filepath, @Nullable String englishName, @Nullable String homepageUrl) {
         this.name = name;
         this.country = country;
         this.foundationDay = foundationDay;
+        this.filepath = filepath;
+        this.englishName = englishName;
+        this.homepageUrl = homepageUrl;
+    }
+
+    public String getEnglishName() {
+        return englishName;
+    }
+
+    public void setEnglishName(String englishName) {
+        this.englishName = englishName;
+    }
+
+    public String getHomepageUrl() {
+        return homepageUrl;
+    }
+
+    public void setHomepageUrl(String homepageUrl) {
+        this.homepageUrl = homepageUrl;
+    }
+
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
     }
 
     public String getName() {
@@ -44,5 +86,12 @@ public class League {
 
     public void setFoundationDay(Date foundationDay) {
         this.foundationDay = foundationDay;
+    }
+
+    @Override
+    public String toString() {
+        return this.englishName != null
+                ? this.name + "(" + this.englishName + ")"
+                : this.name;
     }
 }

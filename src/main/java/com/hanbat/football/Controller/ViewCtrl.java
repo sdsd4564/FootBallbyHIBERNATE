@@ -28,6 +28,7 @@ public class ViewCtrl implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         goPlayer.setOnMouseClicked(event -> {
             try {
                 FXMLLoader loader = new FXMLLoader();
@@ -46,6 +47,21 @@ public class ViewCtrl implements Initializable {
 
         goTeam.setOnMouseClicked(event -> {
             System.out.println("팀 팀");
+        });
+
+        goLeague.setOnMouseClicked(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("../View/league.fxml"));
+                Parent parent = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle("리그 검색");
+                stage.setScene(new Scene(parent));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 }

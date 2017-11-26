@@ -1,7 +1,5 @@
 package com.hanbat.football.Util;
 
-import com.hanbat.football.Model.Country;
-import com.hanbat.football.Model.League;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -30,6 +28,13 @@ public class DatabaseHelper {
     public static List getCountries() {
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery("from Country ");
+        tx.commit();
+        return query.list();
+    }
+
+    public static List getLeagues() {
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from League ");
         tx.commit();
         return query.list();
     }
