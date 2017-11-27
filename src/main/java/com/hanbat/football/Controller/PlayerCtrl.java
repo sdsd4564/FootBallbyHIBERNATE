@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +31,7 @@ import java.util.ResourceBundle;
 
 public class PlayerCtrl implements Initializable {
 
+    Player player = null;
     @FXML
     private AnchorPane playerInfoView;
     @FXML
@@ -55,6 +57,8 @@ public class PlayerCtrl implements Initializable {
     @FXML
     private AnchorPane leagueLayout;
     @FXML
+    private AnchorPane playerLayout;
+    @FXML
     private Label playerLeague;
     @FXML
     private ImageView playerLeagueView;
@@ -63,10 +67,20 @@ public class PlayerCtrl implements Initializable {
     @FXML
     private ImageView playerCountryView;
 
+    public PlayerCtrl() {
+    }
+
+    public PlayerCtrl(Player player) {
+        this.player = player;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (player != null) {
+            setPlayerView(player);
+        }
         ObservableList<Player> rawData = FXCollections.observableArrayList(new ArrayList<>(DatabaseHelper.getPlayerNames()));
-        FilteredList<Player> filteredList = new FilteredList<Player>(rawData, p -> true);
+        FilteredList<Player> filteredList = new FilteredList<Player>(rawData, s -> true);
 
         searchFiled.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(player -> {
@@ -119,9 +133,38 @@ public class PlayerCtrl implements Initializable {
                 e.printStackTrace();
             }
         });
+
+        playerLayout.setOnMouseClicked(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Team.fxml"));
+//                LeagueCtrl ctrl = new LeagueCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam().getLeague());
+//                loader.setController(ctrl);
+                loader.setControllerFactory((Class<?> controllerType) -> {
+                    if (controllerType == TeamCtrl.class) {
+                        TeamCtrl controller = new TeamCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam());
+                        return controller;
+                    } else {
+                        try {
+                            return controllerType.newInstance();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+                Parent parent = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle("구단 검색");
+                stage.setScene(new Scene(parent));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void setPlayerView(Player player) {
+        if (!playerInfoView.isVisible()) playerInfoView.setVisible(true);
         playerName.setText(player.getName());
         playerBirth.setText(new SimpleDateFormat("yyyy년 M월 d일").format(player.getBirth()));
         playerBody.setText(player.getHeight() + "cm\n/" + player.getWeight() + "kg");
