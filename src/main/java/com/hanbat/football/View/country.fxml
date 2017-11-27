@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.ListView?>
@@ -14,17 +17,57 @@
                     <children>
                         <SplitPane dividerPositions="0.7" layoutX="115.0" layoutY="99.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <AnchorPane maxHeight="-Infinity" maxWidth="414.0" minHeight="-Infinity" minWidth="414.0" prefHeight="274.0" prefWidth="414.0" />
-                                <AnchorPane maxHeight="116.0" maxWidth="414.0" minHeight="116.0" minWidth="414.0" prefHeight="116.0" prefWidth="414.0">
+                        <VBox alignment="CENTER" layoutX="157.0" layoutY="31.0" maxHeight="260.0" maxWidth="414.0" minHeight="260.0" minWidth="414.0" prefHeight="260.0" prefWidth="414.0" SplitPane.resizableWithParent="false">
+                           <children>
+                              <ImageView fx:id="countryImage" fitHeight="160.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="countryName" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="28.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="8.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="capitalName" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                                <AnchorPane maxHeight="130.0" maxWidth="414.0" minHeight="130.0" minWidth="414.0" prefHeight="130.0" prefWidth="414.0">
                                     <children>
-                                        <ListView fx:id="list" layoutX="107.0" layoutY="-42.0" prefHeight="116.0" prefWidth="414.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ScrollPane fx:id="scrollPane" prefViewportHeight="116.0" prefViewportWidth="414.0">
+                                 <content>
+                                              <ListView fx:id="list" maxHeight="116.0" maxWidth="414.0" minHeight="116.0" minWidth="414.0" prefHeight="116.0" prefWidth="414.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </content>
+                              </ScrollPane>
                                     </children>
                                 </AnchorPane>
                             </items>
                         </SplitPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane maxHeight="398.0" maxWidth="176.0" minHeight="398.0" minWidth="176.0" prefHeight="398.0" prefWidth="176.0" />
+                <AnchorPane maxHeight="398.0" maxWidth="184.0" minHeight="398.0" minWidth="184.0" prefHeight="398.0" prefWidth="184.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="소속 리그 목록" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="4.0" left="8.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <ScrollPane maxHeight="377.0" minHeight="377.0" prefHeight="377.0" prefViewportHeight="398.0" prefViewportWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <ListView fx:id="leagueList" layoutX="-8.0" layoutY="77.0" maxHeight="375.0" minHeight="375.0" prefHeight="375.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
             </items>
         </SplitPane>
     </children>

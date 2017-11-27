@@ -11,7 +11,6 @@ public class League {
     @Id
     private String name;
 
-
     @ManyToOne
     @JoinColumn(nullable = false)
     private Country country;
@@ -35,7 +34,7 @@ public class League {
         this.foundationDay = foundationDay;
         this.filepath = filepath;
         this.englishName = englishName;
-        this.homepageUrl = homepageUrl;
+        this.homepageUrl = homepageUrl.contains("http://") || homepageUrl.contains("https://") ? homepageUrl : "http://" + homepageUrl;
     }
 
     public String getEnglishName() {

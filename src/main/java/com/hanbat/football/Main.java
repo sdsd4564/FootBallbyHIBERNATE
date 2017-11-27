@@ -6,7 +6,6 @@ import com.hanbat.football.Model.Enum.Position;
 import com.hanbat.football.Util.DatabaseHelper;
 import com.hanbat.football.View.View;
 
-import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,11 +27,16 @@ public class Main {
             Country korea = new Country("대한민국", "서울", COUNTRY_PATH + "korea.png");
             DatabaseHelper.saveObject(korea);
 
-            Country england = new Country("England", "London");
+            Country england = new Country("England", "London", COUNTRY_PATH + "england.png");
             DatabaseHelper.saveObject(england);
 
             League league = new League("프리미어 리그", england, MY_DATE.parse("19920220"), LEAGUE_PATH + "pre_lea.png", "Premier League", "https://www.premierleague.com/");
+            england.getLeagues().add(league);
             DatabaseHelper.saveObject(league);
+
+            League league1 = new League("EFL 챔피언쉽", england, MY_DATE.parse("20040101"), LEAGUE_PATH + "efl.png", "EFL Championship", "efl.com");
+            england.getLeagues().add(league1);
+            DatabaseHelper.saveObject(league1);
 
             Stadium stadium = new Stadium("Wembley Stadium", 90000, new Date(), england);
             DatabaseHelper.saveObject(stadium);
