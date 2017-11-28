@@ -60,11 +60,16 @@ public class Main {
             TeamPlayer teamPlayer = new TeamPlayer();
             teamPlayer.setPlayer(player);
             teamPlayer.setTeam(team);
-            DatabaseHelper.saveObject(teamPlayer);
-
             team.getPlayers().add(teamPlayer);
             player.getTeams().add(teamPlayer);
+            DatabaseHelper.saveObject(teamPlayer);
+
+            teamPlayer = new TeamPlayer();
+            teamPlayer.setPlayer(player1);
+            teamPlayer.setTeam(team);
+            team.getPlayers().add(teamPlayer);
             player1.getTeams().add(teamPlayer);
+            DatabaseHelper.saveObject(teamPlayer);
 
         } catch (ParseException e) {
             e.printStackTrace();

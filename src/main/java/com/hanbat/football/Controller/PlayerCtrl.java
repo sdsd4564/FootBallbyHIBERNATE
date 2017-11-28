@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PlayerCtrl implements Initializable {
-
+    Player player = null;
     @FXML
     private AnchorPane playerInfoView;
     @FXML
@@ -49,19 +49,19 @@ public class PlayerCtrl implements Initializable {
     @FXML
     private Text playerFoot;
     @FXML
-    private Label playerTeam;
+    private Label playerTeam, playerLeague, playerCountry;
     @FXML
-    private ImageView playerTeamView;
+    private AnchorPane teamLayout, leagueLayout, countryLayout;
     @FXML
-    private AnchorPane leagueLayout;
-    @FXML
-    private Label playerLeague;
-    @FXML
-    private ImageView playerLeagueView;
-    @FXML
-    private Label playerCountry;
-    @FXML
-    private ImageView playerCountryView;
+    private ImageView playerTeamView, playerLeagueView, playerCountryView;
+
+    public PlayerCtrl() {
+
+    }
+
+    public PlayerCtrl(Player player) {
+        this.player = player;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,47 +87,49 @@ public class PlayerCtrl implements Initializable {
 
 
         list.setOnMouseClicked(event -> {
-            if (!playerInfoView.isVisible()) playerInfoView.setVisible(true);
-            Player selected = list.getSelectionModel().getSelectedItem();
-            setPlayerView(selected);
+            player = list.getSelectionModel().getSelectedItem();
+            setPlayerView(player);
         });
 
-        leagueLayout.setOnMouseClicked(event -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/league.fxml"));
-//                LeagueCtrl ctrl = new LeagueCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam().getLeague());
-//                loader.setController(ctrl);
-                loader.setControllerFactory((Class<?> controllerType) -> {
-                    if (controllerType == LeagueCtrl.class) {
-                        LeagueCtrl controller = new LeagueCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam().getLeague());
-                        return controller;
-                    } else {
-                        try {
-                            return controllerType.newInstance();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
-                Parent parent = loader.load();
-                Stage stage = new Stage();
-                stage.setTitle("리그 검색");
-                stage.setScene(new Scene(parent));
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        /*
+        * 선수의 팀 클릭 이벤트, 팀 검색 윈도우로 이동
+        **/
+        teamLayout.setOnMouseClicked(event -> {
+            setPlayerToAnotherWindow("../View/Team.fxml", new TeamCtrl(player.getTeams().iterator().next().getTeam()), "팀 검색", TeamCtrl.class);
         });
+
+        /*
+        * 선수의 리그 클릭 이벤트, 리그 검색 윈도우로 이동
+        **/
+        leagueLayout.setOnMouseClicked(event -> {
+            setPlayerToAnotherWindow("../View/league.fxml", new LeagueCtrl(player.getTeams().iterator().next().getTeam().getLeague()), "리그 검색", LeagueCtrl.class);
+        });
+
+        /*
+        * 선수의 국가 클릭 이벤트, 국가 검색 윈도우로 이동
+        **/
+        countryLayout.setOnMouseClicked(event -> {
+            setPlayerToAnotherWindow("../View/country.fxml", new CountryCtrl(player.getCountry()), "국가 검색", CountryCtrl.class);
+        });
+
+        /*
+        * 메인이 아닌 다른 곳에서 선수 검색 창을 불러올 때
+        **/
+        if (player != null) {
+            setPlayerView(player);
+        }
     }
 
     private void setPlayerView(Player player) {
+        if (!playerInfoView.isVisible())
+            playerInfoView.setVisible(true);
+
         playerName.setText(player.getName());
         playerBirth.setText(new SimpleDateFormat("yyyy년 M월 d일").format(player.getBirth()));
         playerBody.setText(player.getHeight() + "cm\n/" + player.getWeight() + "kg");
         playerPosition.setText(player.getPosition().toString() + "(" + player.getPosition().getDescription() + ")");
         playerFoot.setText(player.getFootType().getDescription());
-        playerImageView.setImage(setImageToView(player.getFilePath()));
+        playerImageView.setImage(setImageToView(player.getFilePath() == null ? "/Images/logo.jpg" : player.getFilePath()));
 
         for (TeamPlayer teamPlayer : player.getTeams()) {
             playerTeam.setText(teamPlayer.getTeam().getName());
@@ -141,7 +143,33 @@ public class PlayerCtrl implements Initializable {
     }
 
     private Image setImageToView(String filepath) {
-        InputStream image = getClass().getResourceAsStream(filepath == null ? "/Images/player/sample.jpg" : filepath);
+        InputStream image = PlayerCtrl.class.getResourceAsStream(filepath == null ? "/Images/player/sample.jpg" : filepath);
         return new Image(image);
+    }
+
+    private void setPlayerToAnotherWindow(String fxmlPath, Initializable controller, String title, Class type) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory((Class<?> controllerType) -> {
+                if (controllerType == type) {
+                    return controller;
+                } else {
+                    try {
+                        return controllerType.newInstance();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            Parent parent = loader.load();
+//            Stage stage = new Stage();
+            Stage stage = (Stage) teamLayout.getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

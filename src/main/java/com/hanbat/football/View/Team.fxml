@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
@@ -10,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hanbat.football.Controller.TeamCtrl">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hanbat.football.Controller.TeamCtrl">
     <children>
         <SplitPane dividerPositions="0.29797979797979796" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -20,7 +26,7 @@
                             <items>
                                 <AnchorPane prefHeight="89.0" prefWidth="233.0">
                                     <children>
-                                        <TextField fx:id="searchFiled" maxHeight="23.0" maxWidth="233.0" minHeight="23.0" minWidth="129.0" prefHeight="23.0" prefWidth="233.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                        <TextField fx:id="searchFiled" maxHeight="23.0" maxWidth="233.0" minHeight="23.0" minWidth="129.0" prefHeight="23.0" prefWidth="233.0" promptText="팀 검색" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane maxHeight="567.0" maxWidth="233.0" minHeight="567.0" minWidth="233.0" prefHeight="567.0" prefWidth="233.0" SplitPane.resizableWithParent="false">
@@ -38,56 +44,80 @@
                             <items>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="555.0">
                                     <children>
-                                        <ImageView fx:id="teamImageView" fitHeight="247.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="teamImageView1" fitHeight="247.0" fitWidth="278.0" layoutX="278.0" pickOnBounds="true" preserveRatio="true" />
-                              <SplitPane dividerPositions="0.32730560578661844, 0.6835443037974683" layoutY="270.0" prefHeight="94.0" prefWidth="555.0">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="126.0">
+                              <HBox prefHeight="364.0" prefWidth="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="364.0" prefWidth="380.0">
                                        <children>
-                                          <Label text="구단명" />
-                                          <Label layoutX="44.0" text="창단일" />
-                                          <VBox layoutY="28.0" prefHeight="65.0" prefWidth="178.0">
-                                             <children>
-                                                <Text fx:id="teamName" strokeType="OUTSIDE" strokeWidth="0.0">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text fx:id="teamBirth" strokeType="OUTSIDE" strokeWidth="0.0" />
-                                             </children>
-                                          </VBox>
+                                                    <ImageView fx:id="teamImageView" fitHeight="364.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="73.0">
+                                    </VBox>
+                                    <VBox alignment="CENTER">
                                        <children>
-                                          <Label text="감독명" />
-                                          <VBox layoutY="22.0" prefHeight="65.0" prefWidth="178.0">
+                                          <AnchorPane maxHeight="60.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" prefWidth="174.0">
                                              <children>
-                                                <Text fx:id="teamCoach" strokeType="OUTSIDE" strokeWidth="0.0">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Text>
+                                                <Label text="순위" />
+                                                <VBox alignment="CENTER" layoutX="38.0" layoutY="29.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Text fx:id="teamRank" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                         <font>
+                                                            <Font size="24.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </VBox>
                                              </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="174.0">
-                                       <children>
-                                          <Label text="순위" />
-                                          <VBox layoutX="38.0" layoutY="29.0" prefHeight="57.0" prefWidth="134.0">
+                                          </AnchorPane>
+                                          <AnchorPane maxHeight="76.0" minHeight="76.0" minWidth="0.0" prefHeight="76.0" prefWidth="73.0">
                                              <children>
-                                                <Text fx:id="teamRank" strokeType="OUTSIDE" strokeWidth="0.0">
-                                                   <font>
-                                                      <Font size="24.0" />
-                                                   </font>
-                                                </Text>
+                                                <Label text="감독명" />
+                                                <VBox alignment="CENTER" layoutY="22.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Text fx:id="teamCoach" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </VBox>
                                              </children>
-                                          </VBox>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="126.0">
+                                             <children>
+                                                <Label text="구단명/창단일" />
+                                                <VBox alignment="CENTER" layoutY="28.0" prefHeight="172.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Label fx:id="teamName" textAlignment="CENTER" wrapText="true">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets left="8.0" right="8.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Text fx:id="teamBirth" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="leagueLayout" maxHeight="100.0" minHeight="100.0" prefHeight="100.0">
+                                             <children>
+                                                <Label text="소속 리그" />
+                                                <VBox alignment="BOTTOM_CENTER" maxHeight="64.0" maxWidth="175.0" minHeight="64.0" minWidth="175.0" prefHeight="64.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <ImageView fx:id="teamLeagueImageView" fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                         <VBox.margin>
+                                                            <Insets bottom="8.0" />
+                                                         </VBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="teamLeagueName" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
+                                    </VBox>
+                                 </children>
+                              </HBox>
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="336.0">
@@ -96,7 +126,7 @@
                                             <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                     <children>
-                                                        <TextField fx:id="playerSearchFiled" layoutX="66.0" layoutY="-1.0" maxHeight="23.0" maxWidth="555.0" minHeight="23.0" minWidth="180.0" prefHeight="23.0" prefWidth="489.0" />
+                                                        <TextField fx:id="playerSearchFiled" layoutX="66.0" layoutY="-1.0" maxHeight="23.0" maxWidth="555.0" minHeight="23.0" minWidth="180.0" prefHeight="23.0" prefWidth="489.0" promptText="선수 검색" />
                                           <Text layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="소속 선수" wrappingWidth="76.12109375" />
                                                     </children>
                                                 </AnchorPane>
