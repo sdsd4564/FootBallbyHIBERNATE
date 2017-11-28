@@ -33,6 +33,6 @@ public enum Position {
 
     @Override
     public String toString() {
-        return this.name() + "(" + description + ")";
+        return this.name();
     }
 }

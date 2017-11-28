@@ -78,9 +78,11 @@ public class DatabaseHelper {
         return query.list();
     }
 
-    public static void saveObject(Object obj) {
+    public static void saveObject(Object... obj) {
         Transaction tx = session.beginTransaction();
-        session.save(obj);
+        for (Object object : obj) {
+            session.save(object);
+        }
         tx.commit();
     }
 }

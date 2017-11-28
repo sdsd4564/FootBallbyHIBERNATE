@@ -19,11 +19,12 @@
                   <VBox layoutX="100.0" layoutY="25.0" prefHeight="250.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <MenuBar fx:id="menuBar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <menus>
-                      <Menu fx:id="menu" mnemonicParsing="false" text="File">
+                      <Menu fx:id="menu" mnemonicParsing="false" text="값 추가">
                         <items>
-                              <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                              <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                              <MenuItem fx:id="menuItem4" mnemonicParsing="false" text="리그" />
+                              <MenuItem fx:id="menuItem2" mnemonicParsing="false" text="국가" />
                           <MenuItem fx:id="menuItem1" mnemonicParsing="false" text="선수" />
+                              <MenuItem fx:id="menuItem3" mnemonicParsing="false" text="구단" />
                         </items>
                       </Menu>
                     </menus>

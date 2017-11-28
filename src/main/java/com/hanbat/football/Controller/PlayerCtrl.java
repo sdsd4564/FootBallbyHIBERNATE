@@ -1,5 +1,6 @@
 package com.hanbat.football.Controller;
 
+import com.hanbat.football.Main;
 import com.hanbat.football.Model.Player;
 import com.hanbat.football.Model.TeamPlayer;
 import com.hanbat.football.Util.DatabaseHelper;
@@ -21,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -129,22 +131,28 @@ public class PlayerCtrl implements Initializable {
         playerBody.setText(player.getHeight() + "cm\n/" + player.getWeight() + "kg");
         playerPosition.setText(player.getPosition().toString() + "(" + player.getPosition().getDescription() + ")");
         playerFoot.setText(player.getFootType().getDescription());
-        playerImageView.setImage(setImageToView(player.getFilePath() == null ? "/Images/logo.jpg" : player.getFilePath()));
+        playerImageView.setImage(setImageToView(player.getFilePath()));
 
         for (TeamPlayer teamPlayer : player.getTeams()) {
             playerTeam.setText(teamPlayer.getTeam().getName());
             playerTeamView.setImage(new Image(getClass().getResourceAsStream(teamPlayer.getTeam().getLogoFilePath())));
         }
 
-        playerLeague.setText(player.getTeams().iterator().next().getTeam().getLeague().getName());
+        playerLeague.setText(player.getTeams().iterator().next().getTeam().getLeague() == null
+                ? "NO ITEM"
+                : player.getTeams().iterator().next().getTeam().getLeague().getName());
         playerLeagueView.setImage(setImageToView(player.getTeams().iterator().next().getTeam().getLeague().getFilepath()));
         playerCountry.setText(player.getCountry().getName());
         playerCountryView.setImage(setImageToView(player.getCountry().getFilePath())); //todo : 이미지가 존재하지 않을 때 띄울 사진 요망
     }
 
     private Image setImageToView(String filepath) {
-        InputStream image = PlayerCtrl.class.getResourceAsStream(filepath == null ? "/Images/player/sample.jpg" : filepath);
-        return new Image(image);
+        try (InputStream fis = new FileInputStream(Main.ABSOLUTE_PATH +filepath)) {
+            return new Image(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void setPlayerToAnotherWindow(String fxmlPath, Initializable controller, String title, Class type) {

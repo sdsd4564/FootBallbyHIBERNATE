@@ -1,5 +1,6 @@
 package com.hanbat.football.Controller;
 
+import com.hanbat.football.Main;
 import com.hanbat.football.Model.Player;
 import com.hanbat.football.Model.Team;
 import com.hanbat.football.Model.TeamPlayer;
@@ -23,7 +24,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import jdk.internal.util.xml.impl.Input;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -133,11 +136,6 @@ public class TeamCtrl implements Initializable {
         playerList.setItems(sortedPlayer);
     }
 
-    private Image setImageToView(String filepath) {
-        InputStream image = getClass().getResourceAsStream(filepath == null ? "/Images/player/sample.jpg" : filepath);
-        return new Image(image);
-    }
-
     private void setTeamToAnothorWindow(Class type, String fxmlPath, Initializable controller, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -162,5 +160,14 @@ public class TeamCtrl implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private Image setImageToView(String filepath) {
+        try (InputStream fis = new FileInputStream(Main.ABSOLUTE_PATH +filepath)) {
+            return new Image(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
