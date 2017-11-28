@@ -1,5 +1,6 @@
 package com.hanbat.football.Controller;
 
+import com.hanbat.football.Main;
 import com.hanbat.football.Model.Player;
 import com.hanbat.football.Model.Team;
 import com.hanbat.football.Model.TeamPlayer;
@@ -9,13 +10,25 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import jdk.internal.util.xml.impl.Input;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,7 +36,7 @@ import java.util.ResourceBundle;
 
 public class TeamCtrl implements Initializable {
 
-    String teamNameStr;
+    Team team = null;
 
     @FXML
     private AnchorPane teamViewInfo;
@@ -37,123 +50,124 @@ public class TeamCtrl implements Initializable {
     private ListView<Player> playerList;
 
     @FXML
-    private Text teamName;
+    private Label teamName;
     @FXML
     private Text teamBirth;
     @FXML
     private Text teamCoach;
     @FXML
     private Text teamRank;
+    @FXML
+    private AnchorPane leagueLayout;
+    @FXML
+    private ImageView teamLeagueImageView;
+    @FXML
+    private Label teamLeagueName;
 
+    public TeamCtrl() {
+    }
 
-/*
-    @FXML
-    private TableView<Team> teamTable;
-    @FXML
-    private TableColumn<Team, String> teamNameColumn;
-    @FXML
-    private TableColumn<Team, String> teamCoachColumn;
-    @FXML
-    private TableColumn<Team, String> teamRankColumn;
-*/
-
+    public TeamCtrl(Team team) {
+        this.team = team;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<Team> rawData = FXCollections.observableArrayList(new ArrayList<>(DatabaseHelper.getTeamData()));
-        FilteredList<Team> filteredList = new FilteredList<Team>(rawData, data -> true);
+        if (team != null) {
+            setTeamView(team);
+            setPlayerList(team);
+        } else
+            teamImageView.setImage(new Image(getClass().getResourceAsStream("/Images/logo.jpg")));
+
+
+        ObservableList<Team> rawData = FXCollections.observableArrayList(new ArrayList<>(DatabaseHelper.getTeams()));
+        FilteredList<Team> filteredList = new FilteredList<>(rawData, data -> true);
         searchFiled.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(team -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                return team.getName().toLowerCase().contains(lowerCaseFilter);
+                return team.getName().toLowerCase().contains(newValue.toLowerCase());
             });
         });
-        teamList.setItems(new SortedList<Team>(filteredList));
+        teamList.setItems(new SortedList<>(filteredList));
 
-        teamList.setOnMouseClicked(event -> {
-            if (!teamViewInfo.isVisible()) teamViewInfo.setVisible(true);
-            Team selected = teamList.getSelectionModel().getSelectedItem();
-            setTeamView(selected);
-
-
-            ObservableList<Player> playerRawData = FXCollections.observableArrayList();
-            for (TeamPlayer teamPlayer : selected.getPlayers()) {
-                playerRawData.add(teamPlayer.getPlayer());
-            }
-            FilteredList<Player> filteredPlayer = new FilteredList<Player>(playerRawData);
-            playerSearchFiled.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredPlayer.setPredicate(player ->  {
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
-
-                    String lowerCaseFilter = newValue.toLowerCase();
-
-//                    return team.getName().toLowerCase().contains(lowerCaseFilter);
-                    return player.getName().toLowerCase().contains(lowerCaseFilter);
-                });
-            });
-            SortedList<Player> sortedPlayer = new SortedList<Player>(filteredPlayer);
-            playerList.setItems(sortedPlayer);
+        teamList.setOnMouseClicked((MouseEvent event) -> {
+            team = teamList.getSelectionModel().getSelectedItem();
+            setTeamView(team);
+            setPlayerList(team);
         });
 
-/*        teamList.setCellFactory(new Callback<ListView<Team>, ListCell<Team>>() {
-            @Override
-            public ListCell<Team> call(ListView<Team> param) {
-                return new ListCell<Team>() {
-                    @Override
-                    protected void updateItem(Team t, boolean bln) {
-                        super.updateItem(t, bln);
-                        if (t != null) {
-                            setText(t.getName());
-                        }
-                    }
-                };
+        playerList.setOnMouseClicked(event1 -> {
+            if (event1.getButton() == MouseButton.PRIMARY && event1.getClickCount() == 2) {
+                setTeamToAnothorWindow(PlayerCtrl.class, "../View/player.fxml", new PlayerCtrl(playerList.getSelectionModel().getSelectedItem()), "선수 검색");
             }
-        })*/;
-
-//        playerList.setCellFactory(new Callback<ListView<Team>, ListCell<Team>>() {
-//            @Override
-//            public ListCell<Team> call(ListView<Team> param) {
-//                return new ListCell<Team>() {
-//                    @Override
-//                    protected void updateItem(Team t, boolean bln) {
-//                        super.updateItem(t, bln);
-//                        if (t != null) {
-//                            setText(t.getPlayers().iterator().next().getPlayer().toString());
-//                            teamNameStr = t.getName();
-//                            System.out.print(teamNameStr);
-//                        }
-//                    }
-//                };
-//            }
-//        });
-
-        teamImageView.setImage(new Image(getClass().getResourceAsStream("/Images/logo.jpg")));
-
+        });
     }
 
-    public void setTeamView(Team team) {
+    private void setTeamView(Team team) {
+        if (!teamViewInfo.isVisible()) teamViewInfo.setVisible(true);
+
+        teamImageView.setImage(setImageToView(team.getLogoFilePath()));
         teamName.setText(team.getName());
         teamCoach.setText(team.getCoach());
-        teamBirth.setText(new SimpleDateFormat("yyyy년 MM월 dd일").format(team.getFoundationDay()));
-        teamRank.setText(Integer.toString(team.getRank()));
+        teamBirth.setText(new SimpleDateFormat("yyyy년 M월 d일").format(team.getFoundationDay()));
+        teamRank.setText(Integer.toString(team.getRank()) + "위");
+        leagueLayout.setOnMouseClicked(event -> {
+            setTeamToAnothorWindow(LeagueCtrl.class, "../View/league.fxml", new LeagueCtrl(team.getLeague()), "리그 검색");
+        });
+        teamLeagueImageView.setImage(setImageToView(team.getLeague().getFilepath()));
+        teamLeagueName.setText(team.getLeague().getName());
+    }
 
+    private void setPlayerList(Team team) {
+        ObservableList<Player> playerRawData = FXCollections.observableArrayList();
         for (TeamPlayer teamPlayer : team.getPlayers()) {
+            playerRawData.add(teamPlayer.getPlayer());
         }
 
+        FilteredList<Player> filteredPlayer = new FilteredList<>(playerRawData);
+        playerSearchFiled.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredPlayer.setPredicate(player -> newValue == null || newValue.isEmpty() || player.getName().toLowerCase().contains(newValue.toLowerCase()));
+        });
+        SortedList<Player> sortedPlayer = new SortedList<>(filteredPlayer);
+
+        playerList.setItems(sortedPlayer);
     }
 
-/*
-    public void setTeamView(Team team) {
-        teamNameColumn.setCellFactory(new PropertyValueFactory<>(team.getName()));
-        teamCoachColumn.setCellFactory(new PropertyValueFactory<>(team.getCoach()));
-        teamRankColumn.setCellFactory(new PropertyValueFactory<>(team.getRank()));
+    private void setTeamToAnothorWindow(Class type, String fxmlPath, Initializable controller, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory((Class<?> controllerType) -> {
+                if (controllerType == type) {
+                    return controller;
+                } else {
+                    try {
+                        return controllerType.newInstance();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            Parent parent = loader.load();
+//            Stage stage = new Stage();
+            Stage stage = (Stage) teamViewInfo.getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-*/
+
+    private Image setImageToView(String filepath) {
+        try (InputStream fis = new FileInputStream(Main.ABSOLUTE_PATH +filepath)) {
+            return new Image(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

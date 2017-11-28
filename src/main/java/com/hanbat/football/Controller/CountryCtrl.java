@@ -1,5 +1,6 @@
 package com.hanbat.football.Controller;
 
+import com.hanbat.football.Main;
 import com.hanbat.football.Model.Country;
 import com.hanbat.football.Model.League;
 import com.hanbat.football.Util.DatabaseHelper;
@@ -22,7 +23,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -38,8 +41,20 @@ public class CountryCtrl implements Initializable {
     @FXML
     private Label countryName, capitalName;
 
+    public CountryCtrl() {
+    }
+
+    public CountryCtrl(Country country) {
+        this.country = country;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (country != null) {
+            System.out.println("country initialize");
+            setCountryLayout(country);
+        }
+
         list.setOrientation(Orientation.HORIZONTAL);
         list.setCellFactory(param -> new ListCell<Country>() {
             ImageView imageView = new ImageView();
@@ -49,7 +64,7 @@ public class CountryCtrl implements Initializable {
                 super.updateItem(item, empty);
                 if (empty) setGraphic(null);
                 else {
-                    imageView.setImage(new Image(getClass().getResourceAsStream(item.getFilePath() != null ? item.getFilePath() : "/Images/logo.png")));
+                    imageView.setImage(new Image(getClass().getResourceAsStream(item.getFilePath() != null ? item.getFilePath() : "/Images/logo.jpg")));
                     imageView.setFitWidth(120);
                     imageView.setFitHeight(80);
                     Label label = new Label(item.getName());
@@ -84,13 +99,7 @@ public class CountryCtrl implements Initializable {
         /* 국가 가로 목록 아이템 클릭 **/
         list.setOnMouseClicked(event -> {
             country = list.getSelectionModel().getSelectedItem();
-            countryImage.setImage(new Image(getClass().getResourceAsStream(
-                    country.getFilePath() == null
-                            ? "/Images/logo.jpg"
-                            : country.getFilePath())));
-            countryName.setText(country.getName());
-            capitalName.setText(country.getCapital());
-            leagueList.setItems(FXCollections.observableArrayList(new ArrayList<>(country.getLeagues())));
+            setCountryLayout(country);
         });
 
         leagueList.setOnMouseClicked(event -> {
@@ -110,7 +119,8 @@ public class CountryCtrl implements Initializable {
                     });
                     Parent parent = null;
                     parent = loader.load();
-                    Stage stage = new Stage();
+                    Stage stage = (Stage) list.getScene().getWindow();
+//                    Stage stage = new Stage();
                     stage.setTitle("리그 검색");
                     stage.setScene(new Scene(parent));
                     stage.setResizable(false);
@@ -120,5 +130,16 @@ public class CountryCtrl implements Initializable {
                 }
             }
         });
+    }
+
+    private void setCountryLayout(Country country) {
+        try (InputStream stream = new FileInputStream(Main.ABSOLUTE_PATH + country.getFilePath())) {
+            countryImage.setImage(new Image(stream));
+        } catch (IOException e) {
+            countryImage.setImage(new Image(getClass().getResourceAsStream("/Images/logo.jpg")));
+        }
+        countryName.setText(country.getName());
+        capitalName.setText(country.getCapital());
+        leagueList.setItems(FXCollections.observableArrayList(new ArrayList<>(country.getLeagues())));
     }
 }

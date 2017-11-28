@@ -1,5 +1,6 @@
 package com.hanbat.football.Controller;
 
+import com.hanbat.football.Main;
 import com.hanbat.football.Model.League;
 import com.hanbat.football.Model.Team;
 import com.hanbat.football.Util.DatabaseHelper;
@@ -9,17 +10,24 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.awt.*;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -76,7 +84,6 @@ public class LeagueCtrl implements Initializable {
             }
         });
 
-
         ObservableList<League> data = FXCollections.observableArrayList(new ArrayList<>(DatabaseHelper.getLeagues()));
 
         FilteredList<League> filteredList = new FilteredList<>(data, s -> true);
@@ -101,15 +108,27 @@ public class LeagueCtrl implements Initializable {
         list.setItems(sortedList);
 
         list.setOnMouseClicked(event -> {
-            League selected = list.getSelectionModel().getSelectedItem();
+            league = list.getSelectionModel().getSelectedItem();
 
-            setLeagueListView(selected);
-            setLeagueTableView(selected);
+            setLeagueListView(league);
+            setLeagueTableView(league);
+        });
+
+        teamTable.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                setLeagueToAnotherWindow(
+                        new TeamCtrl(DatabaseHelper.getTeam(teamTable.getSelectionModel().getSelectedItem().name.getValue())),
+                        TeamCtrl.class);
+            }
         });
     }
 
     private void setLeagueListView(League league) {
-        leagueLogoView.setImage(new Image(league.getFilepath()));
+        try (InputStream stream = new FileInputStream(Main.ABSOLUTE_PATH + league.getFilepath())) {
+            leagueLogoView.setImage(new Image(stream));
+        } catch (IOException e) {
+            leagueLogoView.setImage(new Image(getClass().getResourceAsStream("/Images/logo.jpg")));
+        }
         leagueName.setText(league.getEnglishName() == null
                 ? league.getName()
                 : league.getName() + "\n" + league.getEnglishName());
@@ -120,10 +139,15 @@ public class LeagueCtrl implements Initializable {
     private void setLeagueTableView(League league) {
         ArrayList<TeamTableModel> tableData = new ArrayList<>();
         for (Team team : league.getTeams()) {
-            tableData.add(new TeamTableModel(new SimpleStringProperty(team.getName()),
-                    new SimpleIntegerProperty(team.getRank()),
-                    new SimpleStringProperty(new SimpleDateFormat("yyyy년 M월 d일").format(team.getFoundationDay())),
-                    new SimpleObjectProperty(new Image(getClass().getResourceAsStream(team.getLogoFilePath())))));
+            try (InputStream stream = new FileInputStream(Main.ABSOLUTE_PATH + team.getLogoFilePath())) {
+                tableData.add(new TeamTableModel(new SimpleStringProperty(team.getName()),
+                        new SimpleIntegerProperty(team.getRank()),
+                        new SimpleStringProperty(new SimpleDateFormat("yyyy년 M월 d일").format(team.getFoundationDay())),
+                        new SimpleObjectProperty(new Image(stream))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
         ObservableList<TeamTableModel> tableRowData = FXCollections.observableArrayList(tableData);
 
@@ -145,6 +169,32 @@ public class LeagueCtrl implements Initializable {
         colName.setCellValueFactory(cellData -> cellData.getValue().name);
         colFoundationDay.setCellValueFactory(cellData -> cellData.getValue().foundationDay);
         teamTable.setItems(tableRowData);
+    }
+
+    private void setLeagueToAnotherWindow(Initializable controller, Class type) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Team.fxml"));
+            loader.setControllerFactory((Class<?> controllerType) -> {
+                if (controllerType == type) {
+                    return controller;
+                } else {
+                    try {
+                        return controllerType.newInstance();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            Parent parent = loader.load();
+            Stage stage = (Stage) searchFilter.getScene().getWindow();
+//            Stage stage = new Stage();
+            stage.setTitle("팀 검색");
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private class TeamTableModel {

@@ -32,6 +32,11 @@ public class TeamPlayer {
     public TeamPlayer() {
     }
 
+    public TeamPlayer(Team team, Player player) {
+        this.team = team;
+        this.player = player;
+    }
+
     public Team getTeam() {
         return team;
     }

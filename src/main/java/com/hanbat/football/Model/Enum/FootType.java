@@ -1,7 +1,7 @@
 package com.hanbat.football.Model.Enum;
 
 public enum FootType {
-    LEFT("왼발"), RIGHT("오른발"), BOTH("양발");
+    LEFT("왼쪽"), RIGHT("오른쪽"), BOTH("양발");
 
     private final String description;
 
@@ -10,6 +10,12 @@ public enum FootType {
     }
 
     public String getDescription() {
+        return description;
+    }
+
+
+    @Override
+    public String toString() {
         return description;
     }
 }

@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hanbat.football.Controller.PlayerCtrl">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hanbat.football.Controller.PlayerCtrl">
     <children>
         <SplitPane dividerPositions="0.29797979797979796" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -25,7 +20,7 @@
                             <items>
                                 <AnchorPane prefHeight="89.0" prefWidth="233.0">
                                     <children>
-                                        <TextField fx:id="searchFiled" maxHeight="23.0" maxWidth="233.0" minHeight="23.0" minWidth="233.0" prefHeight="23.0" prefWidth="233.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                        <TextField fx:id="searchFiled" maxHeight="23.0" maxWidth="233.0" minHeight="23.0" minWidth="233.0" prefHeight="23.0" prefWidth="233.0" promptText="선수 검색" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane maxHeight="567.0" maxWidth="233.0" minHeight="567.0" minWidth="233.0" prefHeight="567.0" prefWidth="233.0" SplitPane.resizableWithParent="false">
@@ -141,7 +136,7 @@
                                     <children>
                                         <SplitPane dividerPositions="0.333, 0.667" layoutX="177.0" layoutY="2.0" prefHeight="163.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <items>
-                                                <AnchorPane fx:id="playerLayout" maxHeight="161.0" maxWidth="180.0" minHeight="161.0" minWidth="180.0" prefHeight="161.0" prefWidth="180.0">
+                                                <AnchorPane fx:id="teamLayout" maxHeight="161.0" maxWidth="180.0" minHeight="161.0" minWidth="180.0" prefHeight="161.0" prefWidth="180.0">
                                                     <children>
                                                         <VBox alignment="CENTER" layoutX="40.0" layoutY="-19.0" prefHeight="181.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <children>
@@ -178,7 +173,7 @@
                                                         </VBox>
                                                     </children>
                                                 </AnchorPane>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                <AnchorPane fx:id="countryLayout" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                     <children>
                                                         <VBox alignment="CENTER" layoutX="40.0" layoutY="-26.0" maxHeight="161.0" maxWidth="180.0" minHeight="161.0" minWidth="180.0" prefHeight="161.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <children>

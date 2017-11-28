@@ -1,5 +1,6 @@
 package com.hanbat.football.Controller;
 
+import com.hanbat.football.Main;
 import com.hanbat.football.Model.Player;
 import com.hanbat.football.Model.TeamPlayer;
 import com.hanbat.football.Util.DatabaseHelper;
@@ -20,8 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import sun.plugin.javascript.navig.Anchor;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -30,7 +31,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PlayerCtrl implements Initializable {
-
     Player player = null;
     @FXML
     private AnchorPane playerInfoView;
@@ -51,23 +51,14 @@ public class PlayerCtrl implements Initializable {
     @FXML
     private Text playerFoot;
     @FXML
-    private Label playerTeam;
+    private Label playerTeam, playerLeague, playerCountry;
     @FXML
-    private ImageView playerTeamView;
+    private AnchorPane teamLayout, leagueLayout, countryLayout;
     @FXML
-    private AnchorPane leagueLayout;
-    @FXML
-    private AnchorPane playerLayout;
-    @FXML
-    private Label playerLeague;
-    @FXML
-    private ImageView playerLeagueView;
-    @FXML
-    private Label playerCountry;
-    @FXML
-    private ImageView playerCountryView;
+    private ImageView playerTeamView, playerLeagueView, playerCountryView;
 
     public PlayerCtrl() {
+
     }
 
     public PlayerCtrl(Player player) {
@@ -76,11 +67,8 @@ public class PlayerCtrl implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (player != null) {
-            setPlayerView(player);
-        }
         ObservableList<Player> rawData = FXCollections.observableArrayList(new ArrayList<>(DatabaseHelper.getPlayerNames()));
-        FilteredList<Player> filteredList = new FilteredList<Player>(rawData, s -> true);
+        FilteredList<Player> filteredList = new FilteredList<Player>(rawData, p -> true);
 
         searchFiled.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(player -> {
@@ -101,70 +89,43 @@ public class PlayerCtrl implements Initializable {
 
 
         list.setOnMouseClicked(event -> {
-            if (!playerInfoView.isVisible()) playerInfoView.setVisible(true);
-            Player selected = list.getSelectionModel().getSelectedItem();
-            setPlayerView(selected);
+            player = list.getSelectionModel().getSelectedItem();
+            setPlayerView(player);
         });
 
+        /*
+        * 선수의 팀 클릭 이벤트, 팀 검색 윈도우로 이동
+        **/
+        teamLayout.setOnMouseClicked(event -> {
+            setPlayerToAnotherWindow("../View/Team.fxml", new TeamCtrl(player.getTeams().iterator().next().getTeam()), "팀 검색", TeamCtrl.class);
+        });
+
+        /*
+        * 선수의 리그 클릭 이벤트, 리그 검색 윈도우로 이동
+        **/
         leagueLayout.setOnMouseClicked(event -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/league.fxml"));
-//                LeagueCtrl ctrl = new LeagueCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam().getLeague());
-//                loader.setController(ctrl);
-                loader.setControllerFactory((Class<?> controllerType) -> {
-                    if (controllerType == LeagueCtrl.class) {
-                        LeagueCtrl controller = new LeagueCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam().getLeague());
-                        return controller;
-                    } else {
-                        try {
-                            return controllerType.newInstance();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
-                Parent parent = loader.load();
-                Stage stage = new Stage();
-                stage.setTitle("리그 검색");
-                stage.setScene(new Scene(parent));
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            setPlayerToAnotherWindow("../View/league.fxml", new LeagueCtrl(player.getTeams().iterator().next().getTeam().getLeague()), "리그 검색", LeagueCtrl.class);
         });
 
-        playerLayout.setOnMouseClicked(event -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/Team.fxml"));
-//                LeagueCtrl ctrl = new LeagueCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam().getLeague());
-//                loader.setController(ctrl);
-                loader.setControllerFactory((Class<?> controllerType) -> {
-                    if (controllerType == TeamCtrl.class) {
-                        TeamCtrl controller = new TeamCtrl(list.getSelectionModel().getSelectedItem().getTeams().iterator().next().getTeam());
-                        return controller;
-                    } else {
-                        try {
-                            return controllerType.newInstance();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
-                Parent parent = loader.load();
-                Stage stage = new Stage();
-                stage.setTitle("구단 검색");
-                stage.setScene(new Scene(parent));
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        /*
+        * 선수의 국가 클릭 이벤트, 국가 검색 윈도우로 이동
+        **/
+        countryLayout.setOnMouseClicked(event -> {
+            setPlayerToAnotherWindow("../View/country.fxml", new CountryCtrl(player.getCountry()), "국가 검색", CountryCtrl.class);
         });
+
+        /*
+        * 메인이 아닌 다른 곳에서 선수 검색 창을 불러올 때
+        **/
+        if (player != null) {
+            setPlayerView(player);
+        }
     }
 
     private void setPlayerView(Player player) {
-        if (!playerInfoView.isVisible()) playerInfoView.setVisible(true);
+        if (!playerInfoView.isVisible())
+            playerInfoView.setVisible(true);
+
         playerName.setText(player.getName());
         playerBirth.setText(new SimpleDateFormat("yyyy년 M월 d일").format(player.getBirth()));
         playerBody.setText(player.getHeight() + "cm\n/" + player.getWeight() + "kg");
@@ -177,14 +138,46 @@ public class PlayerCtrl implements Initializable {
             playerTeamView.setImage(new Image(getClass().getResourceAsStream(teamPlayer.getTeam().getLogoFilePath())));
         }
 
-        playerLeague.setText(player.getTeams().iterator().next().getTeam().getLeague().getName());
+        playerLeague.setText(player.getTeams().iterator().next().getTeam().getLeague() == null
+                ? "NO ITEM"
+                : player.getTeams().iterator().next().getTeam().getLeague().getName());
         playerLeagueView.setImage(setImageToView(player.getTeams().iterator().next().getTeam().getLeague().getFilepath()));
         playerCountry.setText(player.getCountry().getName());
         playerCountryView.setImage(setImageToView(player.getCountry().getFilePath())); //todo : 이미지가 존재하지 않을 때 띄울 사진 요망
     }
 
     private Image setImageToView(String filepath) {
-        InputStream image = getClass().getResourceAsStream(filepath == null ? "/Images/player/sample.jpg" : filepath);
-        return new Image(image);
+        try (InputStream fis = new FileInputStream(Main.ABSOLUTE_PATH +filepath)) {
+            return new Image(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private void setPlayerToAnotherWindow(String fxmlPath, Initializable controller, String title, Class type) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            loader.setControllerFactory((Class<?> controllerType) -> {
+                if (controllerType == type) {
+                    return controller;
+                } else {
+                    try {
+                        return controllerType.newInstance();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            Parent parent = loader.load();
+//            Stage stage = new Stage();
+            Stage stage = (Stage) teamLayout.getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

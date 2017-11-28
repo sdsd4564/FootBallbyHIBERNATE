@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,10 +24,25 @@ public class ViewCtrl implements Initializable {
     @FXML
     private Button goCountry;
     @FXML
-    private ImageView imageView;
+    private MenuItem menuItem1, menuItem2, menuItem3, menuItem4;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        menuItem1.setOnAction(event -> {
+            openAnothorWindow("../View/add_player.fxml", "선수 정보 추가");
+        });
+
+        menuItem2.setOnAction(event -> {
+            openAnothorWindow("../View/add_country.fxml", "국가 정보 추가");
+        });
+
+        menuItem3.setOnAction(event -> {
+            openAnothorWindow("../View/add_team.fxml", "구단 정보 추가");
+        });
+        menuItem4.setOnAction(event -> {
+            openAnothorWindow("../View/add_league.fxml", "리그 정보 추가");
+        });
 
         goPlayer.setOnMouseClicked(event -> {
             try {
@@ -88,5 +103,19 @@ public class ViewCtrl implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void openAnothorWindow(String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

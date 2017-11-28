@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hanbat.football.Controller.AddPlayer">
+    <children>
+        <VBox alignment="CENTER" layoutX="102.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="선수 추가">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="16.0" />
+                    </VBox.margin>
+                </Label>
+                <CheckBox fx:id="isFemale" mnemonicParsing="false" text="여성일 경우 체크" />
+                <TextField fx:id="name" maxWidth="200.0" promptText="이름" />
+                <DatePicker fx:id="birth" maxWidth="200.0" promptText="생년월일" />
+                <HBox maxWidth="200.0">
+                    <children>
+                        <TextField fx:id="height" maxWidth="200.0" promptText="키(cm)" />
+                        <TextField fx:id="weight" promptText="몸무게(kg)" />
+                    </children>
+                </HBox>
+            <HBox alignment="CENTER" maxWidth="200.0">
+               <children>
+                  <Label text="구단" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ChoiceBox fx:id="team" prefWidth="168.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxWidth="200.0">
+               <children>
+                  <Label text="국가">
+                     <padding>
+                        <Insets right="8.0" />
+                     </padding>
+                  </Label>
+                  <ChoiceBox fx:id="country" prefWidth="168.0" />
+               </children>
+            </HBox>
+                <HBox maxWidth="200.0" prefHeight="23.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="주로 쓰는 발" />
+                        <ChoiceBox fx:id="footType" prefWidth="150.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="포지션" />
+                        <ChoiceBox fx:id="position" prefWidth="150.0" />
+                     </children>
+                  </VBox>
+               </children>
+                </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Text fx:id="fileName" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Button fx:id="fileBtn" mnemonicParsing="false" text="사진첨부" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </HBox>
+                <Button fx:id="confirm" mnemonicParsing="false" text="확인">
+                    <VBox.margin>
+                        <Insets top="24.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
