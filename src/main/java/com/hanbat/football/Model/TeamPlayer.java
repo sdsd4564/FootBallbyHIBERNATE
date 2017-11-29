@@ -1,6 +1,5 @@
 package com.hanbat.football.Model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -27,7 +26,6 @@ public class TeamPlayer {
 //    private int numberOfGoal;
 //
 //    private int apperances;
-
 
     public TeamPlayer() {
     }

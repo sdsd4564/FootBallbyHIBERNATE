@@ -1,17 +1,17 @@
 package com.hanbat.football.Model;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import javax.persistence.Column;
 
 @Embeddable
 public class TeamPlayerID implements Serializable {
-
 
     private String teamId;
 
     private int playerId;
 
+    //getters and setters
     public String getTeam() {
         return teamId;
     }
