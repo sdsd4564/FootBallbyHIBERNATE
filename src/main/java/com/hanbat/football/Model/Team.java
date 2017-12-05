@@ -43,6 +43,10 @@ public class Team {
     )
     private Set<TeamPlayer> players = new HashSet<>();
 
+    public void setPlayers(Set<TeamPlayer> players) {
+        this.players = players;
+    }
+
     public Team() {
     }
 
