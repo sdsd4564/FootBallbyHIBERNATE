@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_football_main" default="compile.module.football_main">
+  <dirname property="module.football_main.basedir" file="${ant.file.module_football_main}"/>
+  
+  <property name="module.jdk.home.football_main" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.football_main" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.football_main" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.football_main" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="football_main.output.dir" value="${module.football_main.basedir}/../../out/production/classes"/>
+  <property name="football_main.testoutput.dir" value="${module.football_main.basedir}/../../out/production/classes"/>
+  
+  <path id="football_main.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="football_main.module.production.classpath">
+    <path refid="${module.jdk.classpath.football_main}"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-c3p0:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-core:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.gradle:_org.hibernate.common:hibernate-commons-annotations:5.0.1.final.classpath"/>
+    <path refid="library.gradle:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.gradle:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.gradle:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.gradle:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.gradle:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.gradle:_org.jboss:jandex:2.0.3.final.classpath"/>
+    <path refid="library.gradle:_com.fasterxml:classmate:1.3.0.classpath"/>
+    <path refid="library.gradle:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.gradle:_com.mchange:c3p0:0.9.2.1.classpath"/>
+    <path refid="library.gradle:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.gradle:_com.mchange:mchange-commons-java:0.2.3.4.classpath"/>
+    <path refid="library.gradle:_org.projectlombok:lombok:1.16.18.classpath"/>
+  </path>
+  
+  <path id="football_main.runtime.production.module.classpath">
+    <pathelement location="${football_main.output.dir}"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-c3p0:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-core:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.gradle:_ch.qos.logback:logback-classic:1.2.3.classpath"/>
+    <path refid="library.gradle:_org.hibernate.common:hibernate-commons-annotations:5.0.1.final.classpath"/>
+    <path refid="library.gradle:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.gradle:_com.mchange:c3p0:0.9.5.2.classpath"/>
+    <path refid="library.gradle:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.gradle:_org.hsqldb:hsqldb:2.4.0.classpath"/>
+    <path refid="library.gradle:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.gradle:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.gradle:_com.h2database:h2:1.4.196.classpath"/>
+    <path refid="library.gradle:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.gradle:_mysql:mysql-connector-java:5.1.44.classpath"/>
+    <path refid="library.gradle:_org.postgresql:postgresql:9.4.1212.classpath"/>
+    <path refid="library.gradle:_org.jboss:jandex:2.0.3.final.classpath"/>
+    <path refid="library.gradle:_com.fasterxml:classmate:1.3.0.classpath"/>
+    <path refid="library.gradle:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.gradle:_com.mchange:c3p0:0.9.2.1.classpath"/>
+    <path refid="library.gradle:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.gradle:_com.mchange:mchange-commons-java:0.2.3.4.classpath"/>
+    <path refid="library.gradle:_ch.qos.logback:logback-core:1.2.3.classpath"/>
+    <path refid="library.gradle:_com.mchange:mchange-commons-java:0.2.11.classpath"/>
+  </path>
+  
+  <path id="football_main.module.classpath">
+    <path refid="${module.jdk.classpath.football_main}"/>
+    <pathelement location="${football_main.output.dir}"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-c3p0:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-core:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.gradle:_ch.qos.logback:logback-classic:1.2.3.classpath"/>
+    <path refid="library.gradle:_org.hibernate.common:hibernate-commons-annotations:5.0.1.final.classpath"/>
+    <path refid="library.gradle:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.gradle:_com.mchange:c3p0:0.9.5.2.classpath"/>
+    <path refid="library.gradle:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.gradle:_org.hsqldb:hsqldb:2.4.0.classpath"/>
+    <path refid="library.gradle:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.gradle:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.gradle:_com.h2database:h2:1.4.196.classpath"/>
+    <path refid="library.gradle:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.gradle:_mysql:mysql-connector-java:5.1.44.classpath"/>
+    <path refid="library.gradle:_org.postgresql:postgresql:9.4.1212.classpath"/>
+    <path refid="library.gradle:_org.jboss:jandex:2.0.3.final.classpath"/>
+    <path refid="library.gradle:_com.fasterxml:classmate:1.3.0.classpath"/>
+    <path refid="library.gradle:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.gradle:_com.mchange:c3p0:0.9.2.1.classpath"/>
+    <path refid="library.gradle:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.gradle:_com.mchange:mchange-commons-java:0.2.3.4.classpath"/>
+    <path refid="library.gradle:_org.projectlombok:lombok:1.16.18.classpath"/>
+    <path refid="library.gradle:_ch.qos.logback:logback-core:1.2.3.classpath"/>
+    <path refid="library.gradle:_com.mchange:mchange-commons-java:0.2.11.classpath"/>
+  </path>
+  
+  <path id="football_main.runtime.module.classpath">
+    <pathelement location="${football_main.output.dir}"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-c3p0:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.hibernate:hibernate-core:5.1.10.final.classpath"/>
+    <path refid="library.gradle:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.gradle:_ch.qos.logback:logback-classic:1.2.3.classpath"/>
+    <path refid="library.gradle:_org.hibernate.common:hibernate-commons-annotations:5.0.1.final.classpath"/>
+    <path refid="library.gradle:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.gradle:_com.mchange:c3p0:0.9.5.2.classpath"/>
+    <path refid="library.gradle:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.gradle:_org.hsqldb:hsqldb:2.4.0.classpath"/>
+    <path refid="library.gradle:_org.javassist:javassist:3.20.0-ga.classpath"/>
+    <path refid="library.gradle:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.gradle:_com.h2database:h2:1.4.196.classpath"/>
+    <path refid="library.gradle:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.gradle:_mysql:mysql-connector-java:5.1.44.classpath"/>
+    <path refid="library.gradle:_org.postgresql:postgresql:9.4.1212.classpath"/>
+    <path refid="library.gradle:_org.jboss:jandex:2.0.3.final.classpath"/>
+    <path refid="library.gradle:_com.fasterxml:classmate:1.3.0.classpath"/>
+    <path refid="library.gradle:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.gradle:_com.mchange:c3p0:0.9.2.1.classpath"/>
+    <path refid="library.gradle:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.gradle:_com.mchange:mchange-commons-java:0.2.3.4.classpath"/>
+    <path refid="library.gradle:_org.projectlombok:lombok:1.16.18.classpath"/>
+    <path refid="library.gradle:_ch.qos.logback:logback-core:1.2.3.classpath"/>
+    <path refid="library.gradle:_com.mchange:mchange-commons-java:0.2.11.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.football_main">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.football_main">
+    <patternset refid="excluded.from.module.football_main"/>
+  </patternset>
+  
+  <path id="football_main.module.sourcepath">
+    <dirset dir="${module.football_main.basedir}/../../src/main">
+      <include name="java"/>
+      <include name="resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.football_main" depends="compile.module.football_main.production,compile.module.football_main.tests" description="Compile module football_main"/>
+  
+  <target name="compile.module.football_main.production" depends="register.custom.compilers" description="Compile module football_main; production classes">
+    <mkdir dir="${football_main.output.dir}"/>
+    <javac2 destdir="${football_main.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.football_main}/javac">
+      <compilerarg line="${compiler.args.football_main}"/>
+      <bootclasspath refid="football_main.module.bootclasspath"/>
+      <classpath refid="football_main.module.production.classpath"/>
+      <src refid="football_main.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.football_main"/>
+    </javac2>
+    
+    <copy todir="${football_main.output.dir}">
+      <fileset dir="${module.football_main.basedir}/../../src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.football_main.basedir}/../../src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.football_main.tests" depends="register.custom.compilers,compile.module.football_main.production" description="compile module football_main; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.football_main" description="cleanup module">
+    <delete dir="${football_main.output.dir}"/>
+    <delete dir="${football_main.testoutput.dir}"/>
+  </target>
+</project>

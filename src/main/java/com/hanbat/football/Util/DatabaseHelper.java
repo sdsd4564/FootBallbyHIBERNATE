@@ -1,6 +1,8 @@
 package com.hanbat.football.Util;
 
 import com.hanbat.football.Model.Country;
+import com.hanbat.football.Model.League;
+import com.hanbat.football.Model.Player;
 import com.hanbat.football.Model.Team;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,6 +27,14 @@ public class DatabaseHelper {
         Query query = session.createQuery("FROM Player ");
         tx.commit();
         return query.list();
+    }
+
+    public static Player getPlayer(String name) {
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Player WHERE name = ?");
+        query.setParameter(0, name);
+        tx.commit();
+        return (Player) query.uniqueResult();
     }
 
     public static Team getTeam(String teamName) {
@@ -69,6 +79,14 @@ public class DatabaseHelper {
         Query query = session.createQuery("SELECT Country .name FROM Country ");
         tx.commit();
         return ((List<String>) query.list());
+    }
+
+    public static League getLeague(String name) {
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM League WHERE name = ?");
+        query.setParameter(0, name);
+        tx.commit();
+        return (League) query.uniqueResult();
     }
 
     public static List getLeagues() {

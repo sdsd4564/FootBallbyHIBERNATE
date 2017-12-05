@@ -11,15 +11,18 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -56,6 +59,8 @@ public class PlayerCtrl implements Initializable {
     private AnchorPane teamLayout, leagueLayout, countryLayout;
     @FXML
     private ImageView playerTeamView, playerLeagueView, playerCountryView;
+    @FXML
+    private TabPane tabPane;
 
     public PlayerCtrl() {
 
@@ -96,9 +101,18 @@ public class PlayerCtrl implements Initializable {
         /*
         * 선수의 팀 클릭 이벤트, 팀 검색 윈도우로 이동
         **/
-        teamLayout.setOnMouseClicked(event -> {
-            setPlayerToAnotherWindow("../View/Team.fxml", new TeamCtrl(player.getTeams().iterator().next().getTeam()), "팀 검색", TeamCtrl.class);
+        tabPane.getSelectionModel().getSelectedItem().getTabPane().setOnMouseClicked(event -> {
+            for (TeamPlayer teamPlayer : player.getTeams()) {
+                if (teamPlayer.getTeam().getName().equals(tabPane.getSelectionModel().getSelectedItem().getId())) {
+                    setPlayerToAnotherWindow("../View/Team.fxml", new TeamCtrl(teamPlayer.getTeam()), "팀 검색", TeamCtrl.class);
+                    break;
+                }
+            }
         });
+//        tabPane.selectionModelProperty().addListener(event -> {
+//
+//            setPlayerToAnotherWindow("../View/Team.fxml", new TeamCtrl(), "팀 검색", TeamCtrl.class);
+//        });
 
         /*
         * 선수의 리그 클릭 이벤트, 리그 검색 윈도우로 이동
@@ -125,6 +139,7 @@ public class PlayerCtrl implements Initializable {
     private void setPlayerView(Player player) {
         if (!playerInfoView.isVisible())
             playerInfoView.setVisible(true);
+        tabPane.getTabs().clear();
 
         playerName.setText(player.getName());
         playerBirth.setText(new SimpleDateFormat("yyyy년 M월 d일").format(player.getBirth()));
@@ -134,8 +149,23 @@ public class PlayerCtrl implements Initializable {
         playerImageView.setImage(setImageToView(player.getFilePath()));
 
         for (TeamPlayer teamPlayer : player.getTeams()) {
-            playerTeam.setText(teamPlayer.getTeam().getName());
-            playerTeamView.setImage(new Image(getClass().getResourceAsStream(teamPlayer.getTeam().getLogoFilePath())));
+
+            Label label = new Label(teamPlayer.getTeam().getName());
+            label.setFont(Font.font(16));
+            label.setWrapText(true);
+            label.setTextAlignment(TextAlignment.CENTER);
+            ImageView imageView = new ImageView(setImageToView(teamPlayer.getTeam().getLogoFilePath()));
+            imageView.setFitHeight(80);
+            imageView.setFitWidth(130);
+            VBox.setMargin(label, new Insets(8, 0, 0, 0));
+            VBox vBox = new VBox(imageView, label);
+            vBox.setAlignment(Pos.CENTER);
+            Tab tab = new Tab(String.valueOf(tabPane.getTabs().size() + 1), vBox);
+            tab.setId(teamPlayer.getTeam().getName());
+            tabPane.getTabs().add(tab);
+
+//            playerTeam.setText(teamPlayer.getTeam().getName());
+//            playerTeamView.setImage(new Image(getClass().getResourceAsStream(teamPlayer.getTeam().getLogoFilePath())));
         }
 
         playerLeague.setText(player.getTeams().iterator().next().getTeam().getLeague() == null
@@ -147,7 +177,7 @@ public class PlayerCtrl implements Initializable {
     }
 
     private Image setImageToView(String filepath) {
-        try (InputStream fis = new FileInputStream(Main.ABSOLUTE_PATH +filepath)) {
+        try (InputStream fis = new FileInputStream(Main.ABSOLUTE_PATH + filepath)) {
             return new Image(fis);
         } catch (IOException e) {
             e.printStackTrace();

@@ -136,24 +136,32 @@
                                     <children>
                                         <SplitPane dividerPositions="0.333, 0.667" layoutX="177.0" layoutY="2.0" prefHeight="163.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <items>
-                                                <AnchorPane fx:id="teamLayout" maxHeight="161.0" maxWidth="180.0" minHeight="161.0" minWidth="180.0" prefHeight="161.0" prefWidth="180.0">
+                                                <AnchorPane fx:id="teamLayout" maxHeight="161.0" maxWidth="190.0" minHeight="161.0" minWidth="190.0" prefHeight="161.0" prefWidth="190.0">
                                                     <children>
-                                                        <VBox alignment="CENTER" layoutX="40.0" layoutY="-19.0" prefHeight="181.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <children>
-                                                                <ImageView fx:id="playerTeamView" fitHeight="80.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
-                                                                <Label fx:id="playerTeam" textAlignment="CENTER" wrapText="true">
-                                                                    <font>
-                                                                        <Font size="16.0" />
-                                                                    </font>
-                                                                    <opaqueInsets>
-                                                                        <Insets top="8.0" />
-                                                                    </opaqueInsets>
-                                                                    <VBox.margin>
-                                                                        <Insets top="8.0" />
-                                                                    </VBox.margin>
-                                                                </Label>
-                                                            </children>
-                                                        </VBox>
+                                          <TabPane fx:id="tabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
+                                             <tabs>
+                                                <Tab>
+                                                   <content>
+                                                                    <VBox alignment="CENTER" layoutX="40.0" layoutY="-19.0" prefHeight="181.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                        <children>
+                                                                            <ImageView fx:id="playerTeamView" fitHeight="80.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                                                                            <Label fx:id="playerTeam" textAlignment="CENTER" wrapText="true">
+                                                                                <font>
+                                                                                    <Font size="16.0" />
+                                                                                </font>
+                                                                                <opaqueInsets>
+                                                                                    <Insets top="8.0" />
+                                                                                </opaqueInsets>
+                                                                                <VBox.margin>
+                                                                                    <Insets top="8.0" />
+                                                                                </VBox.margin>
+                                                                            </Label>
+                                                                        </children>
+                                                                    </VBox>
+                                                   </content>
+                                                </Tab>
+                                             </tabs>
+                                          </TabPane>
                                                     </children>
                                                 </AnchorPane>
                                                 <AnchorPane fx:id="leagueLayout" maxHeight="161.0" maxWidth="179.0" minHeight="161.0" minWidth="179.0" prefHeight="160.0" prefWidth="100.0">

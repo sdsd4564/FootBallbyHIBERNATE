@@ -1,6 +1,8 @@
 package com.hanbat.football.View;
 
+import com.hanbat.football.Util.DatabaseHelper;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +36,12 @@ public class View extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.setResizable(false);
+
+            primaryStage.setOnCloseRequest(event -> {
+                DatabaseHelper.sessionClose();
+                Platform.exit();
+                System.exit(0);
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

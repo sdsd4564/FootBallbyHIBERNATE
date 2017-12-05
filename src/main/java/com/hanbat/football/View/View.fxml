@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
@@ -16,7 +17,28 @@
             <items>
                 <AnchorPane maxHeight="250.0" maxWidth="300.0" minHeight="250.0" minWidth="300.0" prefHeight="250.0" prefWidth="300.0" SplitPane.resizableWithParent="false">
                <children>
-                  <VBox layoutX="100.0" layoutY="25.0" prefHeight="250.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <VBox alignment="CENTER" layoutX="100.0" layoutY="25.0" prefHeight="250.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Football Management System" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="48.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="v1.0" />
+                        <Label text="20131696 한 재 현">
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="20141931 이 한 솔">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children></VBox>
                   <MenuBar fx:id="menuBar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <menus>
                       <Menu fx:id="menu" mnemonicParsing="false" text="값 추가">
